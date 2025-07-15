@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perusahaan Desain Grafis</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Playfair+Display:700&display=swap">
+    <style>
+        /* Luxury effect for portfolio filter buttons */
+        #portfolio-filters .filter-btn {
+            background: linear-gradient(90deg, #fff7bf 0%, #bfa14a 100%);
+            color: #181818;
+            font-weight: bold;
+            border: 2px solid #bfa14a;
+            border-radius: 7px;
+            padding: 8px 18px;
+            margin: 0 6px 8px 0;
+            cursor: pointer;
+            box-shadow: 0 2px 12px #bfa14a55, 0 1px 4px #fff7bf55;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.18s;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 8px #fff7bf99, 0 1px 4px #bfa14a55;
+            position: relative;
+            overflow: hidden;
+        }
+        #portfolio-filters .filter-btn::after {
+            content: '';
+        }
+        /* Header clean luxury style */
+        header {
+            background: #181818;
+            color: #bfa14a;
+            padding: 48px 0 48px 0;
+            text-align: center;
+            position: relative;
+            overflow: visible;
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid #bfa14a55;
+            border-radius: 0 0 32px 32px;
+            z-index: 2;
+            box-shadow: none;
+        }
+        /* Efek partikel bintang di background */
+        #stars {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+        /* Animasi typing pada subjudul */
+        .typing {
+            display: inline-block;
+            border-right: 2px solid #bfa14a;
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 100vw;
+            /* Animasi hanya saat pertama kali muncul, selanjutnya tanpa animasi agar teks selalu tampil penuh */
+            animation: blink-caret 0.7s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #bfa14a; }
+        }
+        /* Animasi judul mewah */
+        .fancy-title {
+            background: linear-gradient(90deg, #bfa14a 30%, #fff7bf 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 24px #bfa14a99);
+            letter-spacing: 4px;
+        }
+body {
+    font-family: 'Montserrat', Arial, sans-serif !important;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #181818 0%, #232526 100%);
+    color: #bfa14a;
+    /* Animated gradient overlay */
+    position: relative;
+}
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+        body::before {
+            content: '';
+            position: fixed;
+            top: auto; left: auto; right: 0; bottom: 0;
+            width: 340px; height: 340px;
+            background: radial-gradient(circle at 100% 100%, #fff7bf33 0%, #bfa14a22 60%, transparent 100%);
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.5;
+            mix-blend-mode: lighten;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+            50% { background-position: 50% 50%; filter: hue-rotate(20deg); }
+            100% { background-position: 100% 50%; filter: hue-rotate(-10deg); }
+        }
+        /* Soft gold light rays in corners */
+        body::after {
+            content: '';
+            position: fixed;
+            left: 0; top: 48px;
+            width: 320px; height: 320px;
+            background: radial-gradient(circle at 0 0, #fff7bf55 0%, #bfa14a33 60%, transparent 100%);
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.7;
+            mix-blend-mode: lighten;
+        }
+
+        header h1,
+        header span[style*='font-size:2.8em'] {
+            margin: 0;
+            font-size: 3.5em;
+            letter-spacing: 3px;
+            font-family: 'Playfair Display', serif;
+            color: #bfa14a;
+            text-shadow: 0 2px 16px #bfa14a99, 0 1px 8px #18181899;
+            position: relative;
+            z-index: 1;
+            background: none;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+            filter: none;
+            animation: none;
+        }
+        header p, #subtitle {
+            margin: 18px 0 0 0;
+            font-size: 1.3em;
+            color: #bfa14a;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 8px #bfa14a55, 0 1px 4px #18181899;
+            background: none;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+            filter: none;
+            font-weight: bold;
+            letter-spacing: 1.2px;
+            animation: none;
+        }
+        nav {
+            background: #181818;
+            text-align: center;
+            box-shadow: 0 2px 8px #bfa14a33;
+        }
+        nav a {
+            color: #bfa14a;
+            text-decoration: none;
+            padding: 18px 32px;
+            display: inline-block;
+            font-weight: 700;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            transition: color 0.2s, background 0.2s, box-shadow 0.3s;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, #fff7bfa0 0%, transparent 80%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: width 0.3s, height 0.3s, opacity 0.3s;
+            z-index: 0;
+        }
+        nav a:hover {
+            background: #bfa14a;
+            color: #181818;
+            box-shadow: 0 0 18px #bfa14a99, 0 2px 8px #0008;
+        }
+        nav a:hover::after {
+            width: 120%;
+            height: 200%;
+            opacity: 0.18;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            background: rgba(24,24,24,0.75);
+            padding: 40px 32px;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px #bfa14a55, 0 1.5px 8px #fff7bf33, 0 0 0 4px #fff7bf44;
+            /* Glassmorphism effect */
+            backdrop-filter: blur(12px) saturate(1.3);
+            border: 2.5px solid;
+            border-image: linear-gradient(90deg, #fff7bf 0%, #bfa14a 100%);
+            border-image-slice: 1;
+            position: relative;
+            animation: borderShine 5s linear infinite;
+        }
+@keyframes borderShine {
+    0% { box-shadow: 0 4px 32px #bfa14a55, 0 1.5px 8px #fff7bf33, 0 0 0 4px #fff7bf44; }
+    50% { box-shadow: 0 8px 48px #fff7bfcc, 0 2px 16px #bfa14a99, 0 0 0 8px #fff7bf99; }
+    100% { box-shadow: 0 4px 32px #bfa14a55, 0 1.5px 8px #fff7bf33, 0 0 0 4px #fff7bf44; }
+}
+        .container::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; right: 0; bottom: 0;
+            border-radius: 18px;
+            background: linear-gradient(120deg, #bfa14a22 0%, transparent 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .container > * {
+            position: relative;
+            z-index: 1;
+        }
+        section h2 {
+            font-family: 'Playfair Display', serif !important;
+            color: #bfa14a;
+            font-size: 2.1em;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 36px;
+            justify-content: center;
+        }
+        .service {
+            flex: 1 1 260px;
+            background: linear-gradient(135deg, #232526 60%, #bfa14a22 100%);
+            border-radius: 14px;
+            padding: 32px 20px 28px 20px;
+            box-shadow: 0 2px 12px #bfa14a22, 0 1px 4px #0005;
+            text-align: center;
+            border: 1.5px solid #bfa14a55;
+            transition: transform 0.25s, box-shadow 0.25s;
+            position: relative;
+        }
+        .service:hover {
+            transform: translateY(-8px) scale(1.04);
+            box-shadow: 0 8px 32px #bfa14a55, 0 2px 8px #0008;
+            z-index: 2;
+        }
+        .service h3 {
+            margin-top: 0;
+            color: #bfa14a;
+            font-family: 'Playfair Display', serif !important;
+            font-size: 1.3em;
+            margin-bottom: 12px;
+        }
+        .service p {
+            font-family: 'Montserrat', Arial, sans-serif !important;
+            font-family: 'Montserrat', Arial, sans-serif !important;
+            font-family: 'Montserrat', Arial, sans-serif !important;
+            color: #bfa14a;
+            font-size: 1.05em;
+        }
+        .portfolio {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            justify-content: center;
+        }
+        .portfolio img {
+            width: 420px;
+            height: 260px;
+            max-width: 100%;
+            object-fit: cover;
+            object-position: center center;
+            background: transparent;
+            border-radius: 12px;
+            box-shadow: 0 2px 18px #fff7bf77, 0 1px 8px #bfa14a55, 0 0px 24px #fff7bf33;
+            border: 2.5px solid #fff7bf;
+            transition: transform 0.2s, box-shadow 0.2s, filter 0.3s;
+            filter: brightness(1.01) drop-shadow(0 0 12px #fff7bf66);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+            transform: scale(2.2);
+            /* Adjust scale as needed to hide watermark */
+        }
+        @media (max-width: 900px) {
+            .portfolio img {
+                width: 320px;
+                height: 180px;
+                max-width: 100%;
+                object-fit: cover;
+                object-position: center center;
+                transform: scale(2.2);
+            }
+            header {
+                padding: 28px 0 28px 0;
+                min-height: 220px;
+            }
+            header > div {
+                min-height: 180px !important;
+                padding: 0 10px !important;
+            }
+            header span[style*='font-size:2.8em'] {
+                font-size:2em !important;
+                padding:12px 18px 10px 18px !important;
+                margin-bottom:16px !important;
+            }
+            #subtitle {
+                font-size:1em !important;
+                padding:8px 10px !important;
+            }
+        }
+        .portfolio img:hover {
+            transform: scale(1.08) rotate(-2deg);
+            box-shadow: 0 12px 48px #bfa14a99, 0 2px 8px #0008;
+            z-index: 2;
+            filter: brightness(1.08) drop-shadow(0 0 24px #bfa14a77);
+        }
+        footer {
+            background: linear-gradient(90deg, #181818 60%, #bfa14a 100%);
+            color: #fff;
+            text-align: center;
+            padding: 28px 0 18px 0;
+            margin-top: 50px;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            border-top: 2px solid #bfa14a55;
+        }
+        @media (max-width: 900px) {
+            .container {
+                padding: 24px 6vw;
+            }
+            .portfolio img {
+                width: 100%;
+                height: 100%;
+                transform: scale(2.8);
+                object-position: center 14px;
+            }
+            header > div {
+                min-height: 220px !important;
+            }
+            header span[style*='font-size:2.8em'] {
+                font-size:2em !important;
+                padding:10px 18px 8px 18px !important;
+            }
+        }
+        @media (max-width: 700px) {
+            .services, .portfolio {
+                flex-direction: column;
+                align-items: center;
+            }
+            .container {
+                padding: 16px 2vw;
+            }
+        }
+        /* Animasi fade-in */
+        .container, header, nav, footer, .service, .portfolio img {
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards;
+        }
+        header { animation-delay: 0.1s; }
+        nav { animation-delay: 0.3s; }
+        .container { animation-delay: 0.5s; }
+        footer { animation-delay: 1.2s; }
+        .service { animation-delay: 0.7s; }
+        .portfolio img { animation-delay: 0.9s; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: none; }
+        }
+        /* Parallax effect for header */
+        @media (pointer: fine) {
+            header {
+                background-attachment: fixed;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Luxury Loader -->
+    <div id="luxury-loader" style="position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(24,24,24,0.92);display:flex;align-items:center;justify-content:center;transition:opacity 0.7s cubic-bezier(.77,0,.18,1);">
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="luxury-spinner"></div>
+        <div style="margin-top:28px;font-family:'Playfair Display',serif;font-size:1.5em;color:#fff7bf;letter-spacing:2px;text-shadow:0 2px 16px #bfa14a99,0 1px 8px #fff7bf77;">DESIGNARY</div>
+        <div class="luxury-shimmer-text" style="margin-top:8px;font-size:1.08em;color:#bfa14a;font-family:'Montserrat',sans-serif;letter-spacing:1.2px;">Luxury Experience Loading...</div>
+      </div>
+    </div>
+    <style>
+    .luxury-spinner {
+      width: 68px;
+      height: 68px;
+      border: 6px solid #fff7bf44;
+      border-top: 6px solid #bfa14a;
+      border-radius: 50%;
+      animation: luxurySpin 1.1s linear infinite, luxuryGlow 2.2s ease-in-out infinite alternate;
+      box-shadow: 0 0 32px #bfa14a88, 0 0 0 8px #fff7bf22;
+      background: radial-gradient(circle at 60% 40%, #fff7bf33 0%, #bfa14a22 80%, transparent 100%);
+      position: relative;
+    }
+    @keyframes luxurySpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes luxuryGlow {
+      0% { box-shadow: 0 0 32px #bfa14a88, 0 0 0 8px #fff7bf22; }
+      100% { box-shadow: 0 0 64px #fff7bfcc, 0 0 0 16px #bfa14a44; }
+    }
+    .luxury-shimmer-text {
+      background: linear-gradient(90deg,#fff7bf 20%,#bfa14a 50%,#fff7bf 80%);
+      background-size: 200% auto;
+      color: #bfa14a;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerText 2.2s linear infinite;
+      font-weight: bold;
+    }
+    @keyframes shimmerText {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    </style>
+    <canvas id="stars"></canvas>
+    <canvas id="gold-sparkle"></canvas>
+    <header>
+        <div style="position:relative; width:100%; height:100%; min-height:340px; max-width:1200px; margin:auto; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 32px; box-sizing:border-box; z-index:2;">
+            <!-- Konten utama di paling depan, tanpa background samar -->
+            <div style="position:relative; z-index:10; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px 0 18px 0;">
+                <span style="font-family:'Playfair Display',serif; font-size:2.8em; letter-spacing:3px; color:#bfa14a; text-shadow:0 2px 32px #bfa14a99,0 2px 16px #000a; padding:18px 54px 16px 54px; display:inline-block; margin-bottom:26px; filter:drop-shadow(0 0 18px #bfa14a77); z-index:11;">DESIGNARY</span>
+                <p class="typing" id="subtitle" style="font-size:1.25em; color:#bfa14a; margin:0; text-shadow:0 1px 12px #181818cc,0 1px 8px #bfa14a55; padding:18px 44px; display:inline-block; font-weight:bold; letter-spacing:1.2px; z-index:11;">Menghubungkan Fungsi dengan Estetika, Menyempurnakan Setiap Ruang dan Antarmuka.</p>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <a href="#layanan">Layanan</a>
+        <a href="#kontak">Kontak</a>
+    </nav>
+    <div class="container">
+        <section id="about" style="margin-bottom:40px;">
+            <h2 style="letter-spacing:2px; font-size:2.2em; border-left:5px solid #bfa14a; padding-left:16px;">Tentang DESIGNARY</h2>
+            <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:center; margin-bottom:18px;">
+                <div style="flex:0 0 160px; text-align:center;">
+                    <img src="images/CEO.jpeg" alt="Pendiri Designary" class="founder-photo" style="max-width:100%; height:auto; aspect-ratio:1/1; object-fit:cover; border-radius:50%; border:3px solid #bfa14a; box-shadow:0 4px 24px #bfa14a33; margin-bottom:12px;">
+                    <div style="color:#bfa14a; font-weight:bold; font-size:1.08em; margin-bottom:2px;">Zaki Muhamad Fadilah. A.Cp</div>
+                    <div style="color:#fff7bf; font-size:0.98em;">Founder & CEO</div>
+                </div>
+                <div style="flex:1 1 320px; min-width:220px;">
+                    <p style="font-size:1.13em; color:#bfa14a; margin-bottom:18px; line-height:1.7;">
+                        <b>DESIGNARY</b> adalah perusahaan desain profesional yang berfokus pada tiga bidang utama: <b>Desain Grafis</b>, <b>Desain Interior & Eksterior</b>, dan <b>Desain UI/UX</b>. Kami berkomitmen menghadirkan solusi desain inovatif, fungsional, dan berdampak untuk membangun citra, ruang, serta pengalaman digital terbaik bagi klien kami.
+                    </p>
+                </div>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:32px; margin-bottom:18px;">
+        <style>
+        .founder-photo {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .founder-photo:hover {
+            transform: scale(1.07) rotate(-2deg);
+            box-shadow: 0 8px 32px #bfa14a99, 0 2px 8px #0008;
+        }
+        </style>
+                <div style="flex:1 1 250px; min-width:220px;">
+                    <h3 style="color:#bfa14a; margin-bottom:8px; font-size:1.1em;">Layanan Utama</h3>
+                    <ul style="color:#fff7bf; margin:0 0 0 18px; padding:0;">
+                        <li><b>Desain Grafis:</b> Branding, materi promosi, dan identitas visual yang konsisten.</li>
+                        <li><b>Desain Interior & Eksterior:</b> Konsep ruang estetis dan fungsional untuk mendukung produktivitas serta kenyamanan.</li>
+                        <li><b>Desain UI/UX:</b> Antarmuka dan pengalaman pengguna aplikasi/website yang intuitif dan efektif.</li>
+                    </ul>
+                </div>
+                <div style="flex:1 1 250px; min-width:220px;">
+                    <h3 style="color:#bfa14a; margin-bottom:8px; font-size:1.1em;">Visi & Misi</h3>
+                    <ul style="color:#fff7bf; margin:0 0 0 18px; padding:0;">
+                        <li><b>Visi:</b> Menjadi mitra desain terpercaya yang menginspirasi dan berdampak secara global.</li>
+                        <li><b>Misi:</b> Memberikan pengalaman desain terbaik dengan menggabungkan kreativitas, teknologi, dan ketepatan fungsional, berfokus pada kebutuhan klien.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Testimoni & Rating Section moved to bottom -->
+        <section id="sejarah" style="margin-bottom:40px;">
+            <h2 style="letter-spacing:2px; font-size:2.1em; border-left:5px solid #bfa14a; padding-left:16px;">Sejarah Perusahaan</h2>
+            <p style="font-size:1.09em; color:#fff; line-height:1.7; margin-bottom:0;">
+                <b>DESIGNARY</b> didirikan pada tahun 2023 dengan visi menjadi pemimpin dalam solusi desain inovatif dan terintegrasi. Sejak awal, kami berfokus pada penyediaan layanan desain grafis, interior, eksterior, serta UI/UX yang mengedepankan estetika, fungsi, dan pengalaman pengguna.<br><br>
+                Dengan komitmen untuk memberikan hasil yang tidak hanya memenuhi, tetapi juga melebihi ekspektasi klien, DESIGNARY hadir sebagai mitra strategis dalam menciptakan identitas visual yang kuat, ruang yang fungsional, dan antarmuka pengguna yang intuitif. Kami menggabungkan kreativitas, teknologi, dan pemahaman mendalam tentang kebutuhan klien untuk menghasilkan desain yang berdampak nyata.<br><br>
+                Kami percaya bahwa desain yang baik adalah investasi bernilai jangka panjang. Setiap proyek didorong oleh dedikasi untuk memberikan solusi yang relevan, efektif, dan berkualitas tinggi demi mendukung keberhasilan serta pertumbuhan klien kami.
+            </p>
+        </section>
+        <section id="layanan">
+            <h2>Layanan Kami</h2>
+            <div class="services">
+                <div class="service">
+                    <h3>Branding & Logo</h3>
+                    <p>Membuat identitas visual yang kuat dan profesional untuk bisnis Anda.</p>
+                </div>
+                <div class="service">
+                    <h3>Branding Page</h3>
+                    <p>Desain halaman branding yang elegan dan konsisten untuk memperkuat citra perusahaan Anda.</p>
+                </div>
+                <div class="service">
+                    <h3>Desain Media Sosial</h3>
+                    <p>Konten visual menarik untuk meningkatkan engagement di media sosial.</p>
+                </div>
+                <div class="service">
+                    <h3>Desain Kemasan</h3>
+                    <p>Kemasan produk yang kreatif dan fungsional untuk menarik perhatian konsumen.</p>
+                </div>
+                <div class="service">
+                    <h3>Desain Website</h3>
+                    <p>Website modern, responsif, dan sesuai kebutuhan bisnis Anda.</p>
+                </div>
+                <div class="service">
+                    <h3>Design Interior</h3>
+                    <p>Konsep dan visualisasi interior yang estetis dan fungsional untuk berbagai ruang.</p>
+                    <!-- List of interior sub-services removed as requested -->
+                </div>
+                <div class="service">
+                    <h3>Design Eksterior</h3>
+                    <p>Desain fasad dan eksterior bangunan yang modern dan berkarakter.</p>
+                </div>
+                <div class="service">
+                    <h3>UI/UX</h3>
+                    <p>Desain antarmuka dan pengalaman pengguna aplikasi/website yang intuitif dan menarik.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" style="margin-top:40px;">
+            
+            <div id="portfolio-filters" style="text-align:center; margin-bottom:22px;">
+                <button class="filter-btn" data-filter="all" style="background:#bfa14a; color:#181818; font-weight:bold; border:none; border-radius:7px; padding:8px 18px; margin:0 6px 8px 0; cursor:pointer;">Semua</button>
+                <button class="filter-btn" data-filter="kamar-tidur">Kamar Tidur</button>
+                <button class="filter-btn" data-filter="kamar-mandi">Kamar Mandi</button>
+                <button class="filter-btn" data-filter="ruang-keluarga">Ruang Keluarga</button>
+                <button class="filter-btn" data-filter="ruang-kerja">Ruang Kerja</button>
+                <button class="filter-btn" data-filter="cafe">Cafe</button>
+
+            </div>
+            <div class="portfolio">
+                
+                <!-- Kamar Tidur -->
+                <div class="portfolio-item" data-category="kamar-tidur">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Kamar Tidur 1</h3>
+                    <img src="images/kamar tidur1.webp" alt="Kamar Tidur 1" style="margin-bottom:8px;">
+                </div>
+                <div class="portfolio-item" data-category="kamar-tidur">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Kamar Tidur 2</h3>
+                    <img src="images/kamar tidur2.webp" alt="Kamar Tidur 2" style="margin-bottom:8px;">
+                </div>
+                <div class="portfolio-item" data-category="kamar-tidur">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Kamar Tidur 3</h3>
+                    <img src="images/kamar tidur3.webp" alt="Kamar Tidur 3" style="margin-bottom:8px;">
+                </div>
+                <!-- Kamar Mandi -->
+                <div class="portfolio-item" data-category="kamar-mandi">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Kamar Mandi 1</h3>
+                    <img src="images/kamar mandi1.webp" alt="Kamar Mandi 1" style="margin-bottom:8px;">
+                </div>
+                <div class="portfolio-item" data-category="kamar-mandi">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Kamar Mandi 2</h3>
+                    <img src="images/kamar mandi2.webp" alt="Kamar Mandi 2" style="margin-bottom:8px;">
+                </div>
+                <div class="portfolio-item" data-category="kamar-mandi">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Kamar Mandi 3</h3>
+                    <img src="images/kamar mandi3.webp" alt="Kamar Mandi 3" style="margin-bottom:8px;">
+                </div>
+                <!-- Ruang Keluarga -->
+                <div class="portfolio-item" data-category="ruang-keluarga">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Ruang Keluarga 1</h3>
+                    <img src="images/r keluarga1.webp" alt="Ruang Keluarga 1" style="margin-bottom:8px;">
+                </div>
+                <div class="portfolio-item" data-category="ruang-keluarga">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Ruang Keluarga 2</h3>
+                    <img src="images/r keluarga2.webp" alt="Ruang Keluarga 2" style="margin-bottom:8px;">
+                </div>
+                <div class="portfolio-item" data-category="ruang-keluarga">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Ruang Keluarga 3</h3>
+                    <img src="images/r keluarga3.webp" alt="Ruang Keluarga 3" style="margin-bottom:8px;">
+                </div>
+                <!-- Ruang Tamu -->
+
+                <!-- Ruang Kerja -->
+                <div class="portfolio-item" data-category="ruang-kerja">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Ruang Kerja 1</h3>
+                    <div style="width:420px; height:260px; max-width:100%; border-radius:12px; box-shadow:0 2px 12px #bfa14a33, 0 1px 4px #0005; border:2px solid #bfa14a55; overflow:hidden; margin-left:auto; margin-right:auto; margin-bottom:8px; background:transparent;">
+                        <img src="images/r kerja1.webp" alt="Ruang Kerja 1" style="width:100%; height:100%; object-fit:cover; object-position:center 10px; transform:scale(3.2); display:block; border-radius:0; box-shadow:none; border:none; margin:0;">
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="ruang-kerja">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Ruang Kerja 2</h3>
+                    <img src="images/r kerja2.webp" alt="Ruang Kerja 2" style="margin-bottom:8px;">
+                </div>
+                <div class="portfolio-item" data-category="ruang-kerja">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Ruang Kerja 3</h3>
+                    <img src="images/r kerja3.webp" alt="Ruang Kerja 3" style="margin-bottom:8px;">
+                </div>
+                <!-- Kamar Tidur (ulang) -->
+                
+                <!-- Cafe -->
+                <div class="portfolio-item" data-category="cafe">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Cafe 1</h3>
+                    <img src="images/cafe1.webp" alt="Cafe 1" style="margin-bottom:8px;">
+                </div>
+                <div class="portfolio-item" data-category="cafe">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Cafe 2</h3>
+                    <img src="images/cafe2.webp" alt="Cafe 2" style="margin-bottom:8px;">
+                </div>
+                <div class="portfolio-item" data-category="cafe">
+                    <h3 style="color:#bfa14a; margin-bottom:10px;">Cafe 3</h3>
+                    <img src="images/cafe3.webp" alt="Cafe 3" style="margin-bottom:8px;">
+                </div>
+            </div>
+        </section>
+        <section id="kontak" style="margin-top:40px;">
+            <h2 style="letter-spacing:2px; font-size:2em; border-left:5px solid #bfa14a; padding-left:16px;">Kontak Kami</h2>
+            <p>Email: <a href="mailto:designaryofficiall@gmail.com" style="color:#bfa14a; text-decoration:underline;">designaryofficiall@gmail.com</a></p>
+            <p>WhatsApp: <a href="https://wa.me/6285647806179" style="color:#bfa14a; text-decoration:underline;">+62 856-4780-6179</a></p>
+            <p>Alamat: <span style="color:#fff7bf;">Jl. Padasuka No. 42, Kabupaten Bandung, Jawa Barat 40911</span></p>
+            <div style="margin-top:32px;">
+                <h3 style="color:#bfa14a; margin-bottom:12px; font-size:1.15em;">Kirim Pesan</h3>
+                <form action="mailto:designaryofficiall@gmail.com" method="POST" enctype="text/plain" style="display:flex; flex-direction:column; gap:14px; max-width:420px; background:rgba(24,24,24,0.7); padding:24px 20px 18px 20px; border-radius:12px; box-shadow:0 2px 12px #bfa14a22; border:1.5px solid #bfa14a33;" onsubmit="return validateForm()">
+                    <label for="nama" style="color:#fff7bf; font-size:1em; margin-bottom:2px;">Nama Lengkap</label>
+                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required style="padding:10px 14px; border-radius:7px; border:1.5px solid #bfa14a55; background:#232526; color:#fff; font-size:1em;">
+                    <label for="email" style="color:#fff7bf; font-size:1em; margin-bottom:2px;">Email</label>
+                    <input type="email" id="email" name="email" placeholder="nama@email.com" required style="padding:10px 14px; border-radius:7px; border:1.5px solid #bfa14a55; background:#232526; color:#fff; font-size:1em;">
+                    <label for="pesan" style="color:#fff7bf; font-size:1em; margin-bottom:2px;">Pesan</label>
+                    <textarea id="pesan" name="pesan" placeholder="Tulis pesan Anda di sini..." rows="4" required style="padding:10px 14px; border-radius:7px; border:1.5px solid #bfa14a55; background:#232526; color:#fff; font-size:1em;"></textarea>
+                    <button type="submit" style="background:linear-gradient(90deg,#bfa14a 60%,#fff7bf 100%); color:#181818; font-weight:bold; border:none; border-radius:7px; padding:12px 0; font-size:1.08em; cursor:pointer; transition:background 0.2s; box-shadow:0 2px 8px #bfa14a33; margin-top:8px;">Kirim Pesan</button>
+                </form>
+                <div style="color:#fff7bf; font-size:0.98em; margin-top:10px;">Pesan Anda akan dikirim ke email kami. Data Anda dijamin aman dan hanya digunakan untuk keperluan komunikasi.</div>
+            </div>
+            <script>
+            function validateForm() {
+                var email = document.getElementById('email').value;
+                var nama = document.getElementById('nama').value;
+                var pesan = document.getElementById('pesan').value;
+                if (!nama.trim() || !email.trim() || !pesan.trim()) {
+                    alert('Semua kolom wajib diisi.');
+                    return false;
+                }
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    alert('Format email tidak valid.');
+                    return false;
+                }
+                return true;
+            }
+            </script>
+        </section>
+    </div>
+
+    <!-- Testimoni & Rating Section (moved to bottom) -->
+    <section id="testimoni" style="margin-top:48px;">
+        <h2 style="letter-spacing:2px; font-size:2em; border-left:5px solid #bfa14a; padding-left:16px;">Testimoni & Rating</h2>
+        <div id="testimoni-list" style="margin-bottom:32px;"></div>
+        <form id="form-testimoni" style="background:rgba(24,24,24,0.7); padding:24px 20px 18px 20px; border-radius:12px; box-shadow:0 2px 12px #bfa14a22; border:1.5px solid #bfa14a33; max-width:420px; margin:auto; display:flex; flex-direction:column; gap:14px;">
+            <label for="nama-testi" style="color:#fff7bf; font-size:1em; margin-bottom:2px;">Nama Anda</label>
+            <input type="text" id="nama-testi" name="nama-testi" placeholder="Masukkan nama Anda" required style="padding:10px 14px; border-radius:7px; border:1.5px solid #bfa14a55; background:#232526; color:#fff; font-size:1em;">
+            <label for="komentar-testi" style="color:#fff7bf; font-size:1em; margin-bottom:2px;">Komentar</label>
+            <textarea id="komentar-testi" name="komentar-testi" placeholder="Tulis pengalaman Anda..." rows="3" required style="padding:10px 14px; border-radius:7px; border:1.5px solid #bfa14a55; background:#232526; color:#fff; font-size:1em;"></textarea>
+            <label style="color:#fff7bf; font-size:1em; margin-bottom:2px;">Rating</label>
+            <div id="rating-stars" style="font-size:1.7em; color:#bfa14a; margin-bottom:8px; cursor:pointer;">
+                <span data-star="1">&#9734;</span>
+                <span data-star="2">&#9734;</span>
+                <span data-star="3">&#9734;</span>
+                <span data-star="4">&#9734;</span>
+                <span data-star="5">&#9734;</span>
+            </div>
+            <input type="hidden" id="rating-value" name="rating-value" value="0">
+            <button type="submit" style="background:linear-gradient(90deg,#bfa14a 60%,#fff7bf 100%); color:#181818; font-weight:bold; border:none; border-radius:7px; padding:12px 0; font-size:1.08em; cursor:pointer; transition:background 0.2s; box-shadow:0 2px 8px #bfa14a33; margin-top:8px;">Kirim Testimoni</button>
+        </form>
+    </section>
+    <footer>
+        &copy; 2025 Designary. All rights reserved.
+    </footer>
+<script>
+// Luxury Loader hide on page load
+window.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    var loader = document.getElementById('luxury-loader');
+    if(loader) {
+      loader.style.opacity = 0;
+      setTimeout(function(){ loader.style.display = 'none'; }, 800);
+    }
+  }, 1200); // Bisa diubah durasi loadingnya
+});
+// Filter portfolio interaktif
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.style.background = '');
+    this.style.background = '#bfa14a';
+    this.style.color = '#181818';
+    const filter = this.getAttribute('data-filter');
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      if (filter === 'all' || item.getAttribute('data-category').includes(filter)) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+// Efek partikel bintang
+// Efek partikel bintang & gold sparkle
+const canvas = document.getElementById('stars');
+const goldCanvas = document.getElementById('gold-sparkle');
+if (canvas && goldCanvas) {
+  // Bintang putih
+  const ctx = canvas.getContext('2d');
+  let w = window.innerWidth, h = window.innerHeight;
+  canvas.width = w; canvas.height = h;
+  let stars = Array.from({length: 120}, () => ({
+    x: Math.random()*w,
+    y: Math.random()*h,
+    r: Math.random()*1.2+0.3,
+    o: Math.random()*0.5+0.5,
+    s: Math.random()*0.4+0.1
+  }));
+  // Partikel gold
+  const goldCtx = goldCanvas.getContext('2d');
+  goldCanvas.width = w; goldCanvas.height = h;
+  let sparkles = Array.from({length: 32}, () => ({
+    x: Math.random()*w,
+    y: Math.random()*h,
+    r: Math.random()*2.2+0.8,
+    o: Math.random()*0.5+0.3,
+    s: Math.random()*0.3+0.08,
+    t: Math.random()*Math.PI*2
+  }));
+  function drawStars() {
+    ctx.clearRect(0,0,w,h);
+    for (const star of stars) {
+      ctx.globalAlpha = star.o;
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.r, 0, 2*Math.PI);
+      ctx.fillStyle = '#fff7bf';
+      ctx.shadowColor = '#bfa14a';
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      star.x += star.s;
+      if (star.x > w) star.x = 0;
+    }
+    ctx.globalAlpha = 1;
+  }
+  function drawSparkles() {
+    goldCtx.clearRect(0,0,w,h);
+    for (const s of sparkles) {
+      goldCtx.save();
+      goldCtx.globalAlpha = s.o * (0.7 + 0.3*Math.sin(Date.now()/600 + s.t));
+      let grad = goldCtx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r*2.2);
+      grad.addColorStop(0, '#fff7bf');
+      grad.addColorStop(0.3, '#bfa14a');
+      grad.addColorStop(1, 'rgba(191,161,74,0)');
+      goldCtx.beginPath();
+      goldCtx.arc(s.x, s.y, s.r*2.2, 0, 2*Math.PI);
+      goldCtx.fillStyle = grad;
+      goldCtx.shadowColor = '#fff7bf';
+      goldCtx.shadowBlur = 12;
+      goldCtx.fill();
+      goldCtx.restore();
+      s.x += s.s * Math.cos(s.t);
+      s.y += s.s * Math.sin(s.t);
+      s.t += 0.01 + 0.01*Math.random();
+      if (s.x > w) s.x = 0;
+      if (s.x < 0) s.x = w;
+      if (s.y > h) s.y = 0;
+      if (s.y < 0) s.y = h;
+    }
+  }
+  function animate() {
+    drawStars();
+    drawSparkles();
+    requestAnimationFrame(animate);
+  }
+  animate();
+  window.addEventListener('resize', () => {
+    w = window.innerWidth; h = window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    goldCanvas.width = w; goldCanvas.height = h;
+    stars.forEach(star => {
+      star.x = Math.random()*w;
+      star.y = Math.random()*h;
+    });
+    sparkles.forEach(s => {
+      s.x = Math.random()*w;
+      s.y = Math.random()*h;
+    });
+  });
+}
+// Animasi typing pada subjudul (dengan perbaikan agar teks selalu tampil penuh)
+const subtitle = document.getElementById('subtitle');
+if(subtitle) {
+  const texts = [
+    'Kreativitas Tanpa Batas untuk Bisnis Anda',
+    'Solusi Visual Premium & Eksklusif',
+    'Desain yang Mengangkat Brand Anda',
+    'Inovasi, Elegan, Profesional'
+  ];
+  let idx = 0;
+  function typeLoop() {
+    let text = texts[idx];
+    let i = 0;
+    subtitle.classList.remove('typing');
+    subtitle.textContent = '';
+    function typeChar() {
+      if (i <= text.length) {
+        subtitle.textContent = text.slice(0, i);
+        i++;
+        setTimeout(typeChar, 40);
+      } else {
+        subtitle.classList.add('typing');
+        setTimeout(() => {
+          idx = (idx+1)%texts.length;
+          typeLoop();
+        }, 2000);
+      }
+    }
+    typeChar();
+  }
+  setTimeout(typeLoop, 1000);
+}
+// Background video opsional (bisa diaktifkan jika punya file video)
+// let video = document.createElement('video');
+// video.src = 'background.mp4';
+// video.autoplay = true; video.loop = true; video.muted = true;
+// video.style.position = 'fixed'; video.style.top = 0; video.style.left = 0;
+// video.style.width = '100vw'; video.style.height = '100vh';
+// video.style.objectFit = 'cover'; video.style.zIndex = 0; video.style.opacity = 0.18;
+// document.body.prepend(video);
+</script>
+<script>
+// Testimoni & Rating interaktif
+const stars = document.querySelectorAll('#rating-stars span');
+const ratingValue = document.getElementById('rating-value');
+let currentRating = 0;
+stars.forEach(star => {
+  star.addEventListener('mouseover', function() {
+    const val = parseInt(this.getAttribute('data-star'));
+    highlightStars(val);
+  });
+  star.addEventListener('mouseout', function() {
+    highlightStars(currentRating);
+  });
+  star.addEventListener('click', function() {
+    currentRating = parseInt(this.getAttribute('data-star'));
+    ratingValue.value = currentRating;
+    highlightStars(currentRating);
+  });
+});
+function highlightStars(val) {
+  stars.forEach((star, idx) => {
+    star.innerHTML = idx < val ? '&#9733;' : '&#9734;';
+  });
+}
+// Simpan & tampilkan testimoni
+const formTesti = document.getElementById('form-testimoni');
+const listTesti = document.getElementById('testimoni-list');
+let testimoniArr = [
+  {
+    nama: "Andi Pratama",
+    komentar: "Pelayanan sangat profesional, hasil desainnya memuaskan dan sesuai keinginan saya. Sangat direkomendasikan!",
+    rating: 5,
+    waktu: "12 Juli 2025 14:22"
+  },
+  {
+    nama: "Siti Rahmawati",
+    komentar: "Desain interiornya keren banget, prosesnya cepat dan komunikatif. Terima kasih DESIGNARY!",
+    rating: 5,
+    waktu: "13 Juli 2025 09:10"
+  },
+  {
+    nama: "Budi Santoso",
+    komentar: "Sangat puas dengan hasil branding dan logo untuk usaha saya. Timnya ramah dan kreatif.",
+    rating: 5,
+    waktu: "14 Juli 2025 17:45"
+  },
+  {
+    nama: "Dewi Lestari",
+    komentar: "Website yang dibuat sangat modern dan responsif. Proses pengerjaan juga transparan dan tepat waktu.",
+    rating: 5,
+    waktu: "15 Juli 2025 11:30"
+  },
+  {
+    nama: "Rizky Maulana",
+    komentar: "Hasil desain UI/UX sangat memuaskan, aplikasi jadi lebih mudah digunakan dan menarik.",
+    rating: 5,
+    waktu: "15 Juli 2025 13:12"
+  },
+  {
+    nama: "Fitriani Nurul",
+    komentar: "Suka banget sama konsep interior yang ditawarkan, sesuai dengan keinginan keluarga kami.",
+    rating: 5,
+    waktu: "15 Juli 2025 15:40"
+  },
+  {
+    nama: "Agus Saputra",
+    komentar: "Desain kemasan produk saya jadi lebih menarik dan elegan. Penjualan pun meningkat!",
+    rating: 5,
+    waktu: "15 Juli 2025 16:55"
+  },
+  {
+    nama: "Lina Marlina",
+    komentar: "Tim sangat responsif dan komunikatif. Proses revisi juga cepat dan hasilnya memuaskan.",
+    rating: 5,
+    waktu: "15 Juli 2025 18:20"
+  },
+  {
+    nama: "Fajar Nugroho",
+    komentar: "Sangat direkomendasikan untuk yang ingin branding bisnis secara profesional.",
+    rating: 5,
+    waktu: "15 Juli 2025 19:05"
+  },
+  {
+    nama: "Yuni Astuti",
+    komentar: "Desain cafe yang dibuat sangat instagramable dan kekinian. Banyak pelanggan yang suka!",
+    rating: 5,
+    waktu: "15 Juli 2025 20:11"
+  },
+  {
+    nama: "Dian Prasetyo",
+    komentar: "Harga terjangkau, kualitas premium. Proses pengerjaan juga sangat transparan.",
+    rating: 5,
+    waktu: "15 Juli 2025 21:30"
+  },
+  {
+    nama: "Mega Putri",
+    komentar: "Sangat puas dengan pelayanan dan hasil desain eksterior rumah saya. Keren banget!",
+    rating: 5,
+    waktu: "16 Juli 2025 08:15"
+  },
+  {
+    nama: "Rendi Kurniawan",
+    komentar: "Desain media sosial jadi lebih menarik dan engagement meningkat. Terima kasih!",
+    rating: 5,
+    waktu: "16 Juli 2025 09:22"
+  },
+  {
+    nama: "Salsa Amelia",
+    komentar: "Tim DESIGNARY sangat kreatif dan inovatif. Hasil desain selalu out of the box!",
+    rating: 5,
+    waktu: "16 Juli 2025 10:10"
+  }
+];
+formTesti.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const nama = document.getElementById('nama-testi').value.trim();
+  const komentar = document.getElementById('komentar-testi').value.trim();
+  const rating = parseInt(document.getElementById('rating-value').value);
+  if (!nama || !komentar || !rating) {
+    alert('Semua kolom dan rating wajib diisi.');
+    return;
+  }
+  testimoniArr.unshift({nama, komentar, rating, waktu: new Date().toLocaleString('id-ID')});
+  tampilTestimoni();
+  formTesti.reset();
+  currentRating = 0;
+  highlightStars(0);
+});
+function tampilTestimoni() {
+  listTesti.innerHTML = testimoniArr.length === 0 ? '<div style="color:#fff7bf; text-align:center;">Belum ada testimoni.</div>' :
+    testimoniArr.map(t => `
+      <div style="background:rgba(24,24,24,0.8); border-radius:10px; box-shadow:0 2px 8px #bfa14a22; border:1.2px solid #bfa14a33; margin-bottom:18px; padding:18px 18px 12px 18px;">
+        <div style="color:#bfa14a; font-weight:bold; font-size:1.08em; margin-bottom:2px;">${t.nama} <span style="font-size:0.9em; color:#fff7bf; font-weight:normal;">(${t.waktu})</span></div>
+        <div style="color:#fff; margin-bottom:6px;">${t.komentar}</div>
+        <div style="color:#bfa14a; font-size:1.2em;">${'&#9733;'.repeat(t.rating)}${'&#9734;'.repeat(5-t.rating)}</div>
+      </div>
+    `).join('');
+}
+tampilTestimoni();
+</script>
+</body>
+</html>
